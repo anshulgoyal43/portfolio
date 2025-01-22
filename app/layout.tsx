@@ -5,8 +5,6 @@ import { themeEffect } from "./theme-effect";
 import { Analytics } from "./analytics";
 import { Header } from "./header";
 import { Footer } from "./footer";
-import { usePathname } from "next/navigation";
-import { redirect } from "next/navigation";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -38,25 +36,19 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // Get the current pathname
-  const pathname = usePathname();
-  
-  // Redirect any non-about pages to about
-  if (pathname !== '/about' && !pathname.startsWith('/api') && !pathname.startsWith('/_next')) {
-    redirect('/about');
-  }
-
   return (
     <html
       lang="en"
       className={`${inter.className} antialiased`}
       suppressHydrationWarning={true}
     >
+
       <body className="dark:text-gray-100 max-w-2xl m-auto">
         <main className="p-6 pt-3 md:pt-6 min-h-screen">
           <Header />
           {children}
         </main>
+
         <Footer />
         <Analytics />
       </body>
